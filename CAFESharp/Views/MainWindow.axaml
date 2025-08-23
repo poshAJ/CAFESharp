@@ -1,0 +1,111 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:CAFESharp.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="825"
+    Width="700" Height="825"
+    x:Class="CAFESharp.Views.MainWindow"
+    x:DataType="vm:MainViewModel"
+    Icon="/Assets/cafe-icon.ico"
+    Title="C.A.F.E - Cosmic's Auto Forms Editor">
+
+    <Viewbox Stretch="Uniform">
+        <StackPanel HorizontalAlignment="Left" Margin="25">
+            <u:Divider Content="1. Blueprint Asset" />
+            <u:Form
+                LabelPosition="Left"
+                LabelWidth="225"
+                DataContext="{Binding BlueprintViewModel}"
+                x:DataType="vm:BlueprintViewModel">
+                <u:FormItem Label="Select Blueprint (.uasset):">
+                    <u:PathPicker
+                        Width="525"
+                        Title="Browse..."
+                        AllowMultiple="false"
+                        FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
+                        UsePickerType="OpenFile"
+                        SuggestedStartPath="{Binding StartPath}"
+                        Command="{Binding OpenUAssetCommand}" />
+                </u:FormItem>
+                <TextBox Width="525" u:FormItem.Label="New Mesh Path:" Text="{Binding MeshPath}" />
+                <TextBox Width="525" u:FormItem.Label="New Blood Splatter Path:" Text="{Binding BloodSplatterPath}" />
+                <TextBox Width="525" u:FormItem.Label="New Scabbard Path:" Text="{Binding ScabbardPath}" />
+                <TextBox Width="525" u:FormItem.Label="Main Form Path:" Text="{Binding FormPath}" />
+            </u:Form>
+
+            <u:Divider Content="2. Weapon Asset" />
+            <u:Form
+                LabelPosition="Left"
+                LabelWidth="225"
+                DataContext="{Binding WeaponViewModel}"
+                x:DataType="vm:WeaponViewModel">
+                <u:FormItem Label="Select Weapon (.uasset):">
+                    <u:PathPicker
+                        Width="525"
+                        Title="Browse..."
+                        AllowMultiple="false"
+                        FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
+                        UsePickerType="OpenFile"
+                        SuggestedStartPath="{Binding StartPath}"
+                        Command="{Binding OpenUAssetCommand}" />
+                </u:FormItem>
+                <TextBox Width="525" u:FormItem.Label="New Icon Path:" Text="{Binding IconPath}" />
+                <TextBox Width="525" u:FormItem.Label="New Blueprint Path:" Text="{Binding BlueprintPath}" />
+                <TextBox Width="525" u:FormItem.Label="Main Form Path:" Text="{Binding FormPath}" />
+            </u:Form>
+
+            <u:Divider Content="3. Material Instance Asset" />
+            <u:Form
+                LabelPosition="Left"
+                LabelWidth="225"
+                DataContext="{Binding MaterialInstanceViewModel}"
+                x:DataType="vm:MaterialInstanceViewModel">
+                <u:FormItem Label="Select Material Instance (.uasset):">
+                    <u:PathPicker
+                        Width="525"
+                        Title="Browse..."
+                        AllowMultiple="false"
+                        FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
+                        UsePickerType="OpenFile"
+                        SuggestedStartPath="{Binding StartPath}"
+                        Command="{Binding OpenUAssetCommand}" />
+                </u:FormItem>
+                <TextBox Width="525" u:FormItem.Label="New Diffuse Path:" Text="{Binding DiffusePath}" />
+                <TextBox Width="525" u:FormItem.Label="New NNRM Path:" Text="{Binding NNRMPath}" />
+                <TextBox Width="525" u:FormItem.Label="Main Form Path:" Text="{Binding FormPath}" />
+            </u:Form>
+
+            <u:Divider Content="4. Blood Splatter Asset" />
+            <u:Form
+                LabelPosition="Left"
+                LabelWidth="225"
+                DataContext="{Binding BloodSplatterViewModel}"
+                x:DataType="vm:BloodSplatterViewModel">
+                <u:FormItem Label="Select Blood Splatter (.uasset):">
+                    <u:PathPicker
+                        Width="525"
+                        Title="Browse..."
+                        AllowMultiple="false"
+                        FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
+                        UsePickerType="OpenFile"
+                        SuggestedStartPath="{Binding StartPath}"
+                        Command="{Binding OpenUAssetCommand}" />
+                </u:FormItem>
+                <TextBox Width="525" u:FormItem.Label="Parent Material Instance Path:"
+                    Text="{Binding MaterialInstancePath}" />
+                <TextBox Width="525" u:FormItem.Label="Main Form Path:" Text="{Binding FormPath}" />
+            </u:Form>
+
+            <Button
+                Content="Process"
+                Theme="{DynamicResource SolidButton}"
+                u:FormItem.NoLabel="True"
+                Margin="0 25 0 0"
+                HorizontalAlignment="Stretch"
+                Command="{Binding ProcessCommand}" />
+        </StackPanel>
+    </Viewbox>
+</Window>
