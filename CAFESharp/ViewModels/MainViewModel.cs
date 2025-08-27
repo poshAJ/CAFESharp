@@ -3,14 +3,19 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace CAFESharp.ViewModels;
 
-public partial class MainViewModel : BaseViewModel {
+public partial class MainViewModel (
+        BlueprintViewModel blueprintViewModel,
+        WeaponViewModel weaponViewModel,
+        MaterialInstanceViewModel materialInstanceViewModel,
+        BloodSplatterViewModel bloodSplatterViewModel
+    ) : BaseViewModel {
     #region Properties
 
-    public BlueprintViewModel BlueprintViewModel { get; } = new();
-    public WeaponViewModel WeaponViewModel { get; } = new();
-    public MaterialInstanceViewModel MaterialInstanceViewModel { get; } = new();
-    public BloodSplatterViewModel BloodSplatterViewModel { get; } = new();
-    public bool CreateBackup { get; set; } = true;
+    public BlueprintViewModel BlueprintViewModel { get; } = blueprintViewModel;
+    public WeaponViewModel WeaponViewModel { get; } = weaponViewModel;
+    public MaterialInstanceViewModel MaterialInstanceViewModel { get; } = materialInstanceViewModel;
+    public BloodSplatterViewModel BloodSplatterViewModel { get; } = bloodSplatterViewModel;
+    public bool CreateBackup { get; set; } = false;
 
     #endregion Properties
 

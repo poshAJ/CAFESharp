@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -5,6 +6,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using CAFESharp.ViewModels;
 using CAFESharp.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CAFESharp;
 
@@ -16,12 +18,24 @@ public partial class App : Application {
     }
 
     public override void OnFrameworkInitializationCompleted () {
+        ServiceProvider serviceProvider = new ServiceCollection()
+            .AddLogging()
+            .AddTransient<BlueprintViewModel>()
+            .AddTransient<WeaponViewModel>()
+            .AddTransient<MaterialInstanceViewModel>()
+            .AddTransient<BloodSplatterViewModel>()
+            .AddTransient<MainViewModel>()
+            .AddSingleton<MainWindow>()
+            .BuildServiceProvider();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
             DisableAvaloniaDataAnnotationValidation();
 
-            desktop.MainWindow = new MainWindow {
-                DataContext = new MainViewModel(),
-            };
+            MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
+
+            desktop.MainWindow = mainWindow;
+        } else {
+            throw new NotSupportedException();
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -38,9 +52,8 @@ public partial class App : Application {
                 .OfType<DataAnnotationsValidationPlugin>()
         ];
 
-        foreach (var plugin in dataValidationPluginsToRemove) {
+        foreach (var plugin in dataValidationPluginsToRemove)
             BindingPlugins.DataValidators.Remove(plugin);
-        }
     }
 
     #endregion Private Methods

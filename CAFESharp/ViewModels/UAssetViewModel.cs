@@ -43,9 +43,8 @@ public partial class UAssetViewModel : BaseViewModel {
         PropertyInfo[] properties = GetType()
             .GetProperties(BindingFlags.Instance | BindingFlags.Public);
 
-        foreach (var property in properties) {
+        foreach (var property in properties)
             OnPropertyChanged(property.Name);
-        }
     }
 
     #endregion Private Methods
