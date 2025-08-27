@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.IO;
 using UAssetAPI.UnrealTypes;
 
@@ -6,40 +7,42 @@ namespace CAFESharp.ViewModels;
 public partial class BloodSplatterViewModel : UAssetViewModel {
     #region Constants
 
-    private const int INDEX_MATERIALINSTANCE_PATH = 8;
-    private const int INDEX_MATERIALINSTANCE_NAME = 9;
-    private const int INDEX_FORM_PATH = 2;
-    private const int INDEX_FORM_NAME = 1;
+    private readonly ImmutableDictionary<string, int> INDEX =
+        ImmutableDictionary.Create<string, int>()
+            .Add("MaterialInstance_Path", 8)
+            .Add("MaterialInstance_Name", 9)
+            .Add("Form_Path", 2)
+            .Add("Form_Name", 1);
 
     #endregion Constants
 
     #region Properties
 
     public string MaterialInstancePath {
-        get => _uasset.GetNameReference(INDEX_MATERIALINSTANCE_PATH).Value;
+        get => _uasset.GetNameReference(INDEX["MaterialInstance_Path"]).Value;
         set => SetProperty(
             oldValue: MaterialInstancePath,
             newValue: value,
             model: _uasset,
             callback: (uasset, path) => {
-                _uasset.SetNameReference(INDEX_MATERIALINSTANCE_PATH, (FString) path);
+                _uasset.SetNameReference(INDEX["MaterialInstance_Path"], (FString) path);
 
                 string name = Path.GetFileNameWithoutExtension(path);
-                _uasset.SetNameReference(INDEX_MATERIALINSTANCE_NAME, (FString) name);
+                _uasset.SetNameReference(INDEX["MaterialInstance_Name"], (FString) name);
             }
         );
     }
     public string FormPath {
-        get => _uasset.GetNameReference(INDEX_FORM_PATH).Value;
+        get => _uasset.GetNameReference(INDEX["Form_Path"]).Value;
         set => SetProperty(
             oldValue: FormPath,
             newValue: value,
             model: _uasset,
             callback: (uasset, path) => {
-                _uasset.SetNameReference(INDEX_FORM_PATH, (FString) path);
+                _uasset.SetNameReference(INDEX["Form_Path"], (FString) path);
 
                 string name = Path.GetFileNameWithoutExtension(path);
-                _uasset.SetNameReference(INDEX_FORM_NAME, (FString) name);
+                _uasset.SetNameReference(INDEX["Form_Name"], (FString) name);
             }
         );
     }

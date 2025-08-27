@@ -1,11 +1,12 @@
 <Window
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:u="https://irihi.tech/ursa"
-    xmlns:vm="using:CAFESharp.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="825"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:CAFESharp.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    mc:Ignorable="d"
+    d:DesignWidth="700" d:DesignHeight="825"
     Width="700" Height="825"
     x:Class="CAFESharp.Views.MainWindow"
     x:DataType="vm:MainViewModel"
@@ -32,7 +33,7 @@
                 </u:FormItem>
                 <TextBox Width="525" u:FormItem.Label="New Mesh Path:" Text="{Binding MeshPath}" />
                 <TextBox Width="525" u:FormItem.Label="New Blood Splatter Path:" Text="{Binding BloodSplatterPath}" />
-                <TextBox Width="525" u:FormItem.Label="New Scabbard Path:" Text="{Binding ScabbardPath}" />
+                <TextBox Width="525" u:FormItem.Label="New Scabbard Path:" Text="{Binding ScabbardPath}" IsEnabled="{Binding HasScabbard}" />
                 <TextBox Width="525" u:FormItem.Label="Main Form Path:" Text="{Binding FormPath}" />
             </u:Form>
 
@@ -94,8 +95,7 @@
                         SuggestedStartPath="{Binding StartPath}"
                         Command="{Binding OpenUAssetCommand}" />
                 </u:FormItem>
-                <TextBox Width="525" u:FormItem.Label="Parent Material Instance Path:"
-                    Text="{Binding MaterialInstancePath}" />
+                <TextBox Width="525" u:FormItem.Label="Parent Material Instance Path:" Text="{Binding MaterialInstancePath}" />
                 <TextBox Width="525" u:FormItem.Label="Main Form Path:" Text="{Binding FormPath}" />
             </u:Form>
 
