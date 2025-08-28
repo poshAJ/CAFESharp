@@ -1,28 +1,28 @@
-﻿using System.IO;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 
 namespace CAFESharp.ViewModels;
 
 public partial class MainViewModel (
+        ILogger<MainViewModel> logger,
         BlueprintViewModel blueprintViewModel,
         WeaponViewModel weaponViewModel,
         MaterialInstanceViewModel materialInstanceViewModel,
         BloodSplatterViewModel bloodSplatterViewModel
-    ) : BaseViewModel {
+) : BaseViewModel {
     #region Properties
 
     public BlueprintViewModel BlueprintViewModel { get; } = blueprintViewModel;
     public WeaponViewModel WeaponViewModel { get; } = weaponViewModel;
     public MaterialInstanceViewModel MaterialInstanceViewModel { get; } = materialInstanceViewModel;
     public BloodSplatterViewModel BloodSplatterViewModel { get; } = bloodSplatterViewModel;
-    public bool CreateBackup { get; set; } = false;
 
     #endregion Properties
 
     #region Handlers
 
     [RelayCommand]
-    private void Process () {
+    private void SaveAll () {
         UAssetViewModel[] viewModels = [
             BlueprintViewModel,
             WeaponViewModel,
@@ -34,15 +34,14 @@ public partial class MainViewModel (
             if (string.IsNullOrEmpty(viewModel.FilePath))
                 continue;
 
-            if (CreateBackup) {
-                File.Copy(
-                    sourceFileName: viewModel.FilePath,
-                    destFileName: viewModel.FilePath + ".bak",
-                    overwrite: true
-                );
+            try {
+                viewModel._uasset.Write(viewModel.FilePath);
+
+                logger.LogInformation(message: "Saved '{FileName}'.", viewModel.FileName);
+            } catch {
+                logger.LogError(message: "An error occured while saving '{FileName}'.", viewModel.FileName);
             }
 
-            viewModel._uasset.Write(viewModel.FilePath);
         }
     }
 

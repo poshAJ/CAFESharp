@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using CommunityToolkit.Mvvm.Input;
 using UAssetAPI;
@@ -17,7 +18,7 @@ public partial class UAssetViewModel : BaseViewModel {
     #region Properties
 
     public string StartPath { get; } = Environment
-        .GetFolderPath(Environment.SpecialFolder.UserProfile);
+        .GetFolderPath(folder: Environment.SpecialFolder.UserProfile);
     public string FilePath {
         get => _uasset.FilePath;
         set => SetProperty(
@@ -34,6 +35,9 @@ public partial class UAssetViewModel : BaseViewModel {
             }
         );
     }
+    public string FileName {
+        get => Path.GetFileName(path: FilePath);
+    }
 
     #endregion Properties
 
@@ -41,10 +45,10 @@ public partial class UAssetViewModel : BaseViewModel {
 
     private void RefreshAllProperties () {
         PropertyInfo[] properties = GetType()
-            .GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            .GetProperties(bindingAttr: BindingFlags.Instance | BindingFlags.Public);
 
         foreach (var property in properties)
-            OnPropertyChanged(property.Name);
+            OnPropertyChanged(propertyName: property.Name);
     }
 
     #endregion Private Methods
@@ -52,9 +56,7 @@ public partial class UAssetViewModel : BaseViewModel {
     #region Handlers
 
     [RelayCommand]
-    internal void OpenUAsset (IReadOnlyList<string> paths) {
-        FilePath = paths[0];
-    }
+    internal void OpenUAsset (IReadOnlyList<string> paths) => FilePath = paths[0];
 
     #endregion Handlers
 }
