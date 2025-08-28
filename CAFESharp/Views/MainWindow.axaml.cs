@@ -1,3 +1,5 @@
+using System;
+using Avalonia.Interactivity;
 using CAFESharp.ViewModels;
 using Ursa.Controls;
 
@@ -21,4 +23,9 @@ public partial class MainWindow : UrsaWindow {
     }
 
     #endregion Constructors
+
+    private async void OpenGitHub (object? sender, RoutedEventArgs e) =>
+        await Launcher.LaunchUriAsync(
+            new Uri("https://github.com/poshAJ/CAFESharp")
+        );
 }
