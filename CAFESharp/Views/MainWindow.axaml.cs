@@ -1,14 +1,12 @@
-using Avalonia.Controls.Notifications;
 using CAFESharp.ViewModels;
 using Ursa.Controls;
-using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace CAFESharp.Views;
 
 public partial class MainWindow : UrsaWindow {
     #region Properties
 
-    public WindowNotificationManager NotificationManager { get; set; }
+    public WindowToastManager ToastManager { get; set; }
 
     #endregion Properties
 
@@ -19,9 +17,7 @@ public partial class MainWindow : UrsaWindow {
 
         DataContext = mainViewModel;
 
-        NotificationManager = new(this) {
-            Position = NotificationPosition.TopCenter
-        };
+        ToastManager = new(this);
     }
 
     #endregion Constructors

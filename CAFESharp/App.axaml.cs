@@ -4,7 +4,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using CAFESharp.ViewModels;
+using CAFESharp.Extensions;
 using CAFESharp.Views;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,12 +19,8 @@ public partial class App : Application {
 
     public override void OnFrameworkInitializationCompleted () {
         ServiceProvider serviceProvider = new ServiceCollection()
-            .AddLogging()
-            .AddTransient<BlueprintViewModel>()
-            .AddTransient<WeaponViewModel>()
-            .AddTransient<MaterialInstanceViewModel>()
-            .AddTransient<BloodSplatterViewModel>()
-            .AddTransient<MainViewModel>()
+            .AddLogging(builder => builder.AddToastLogging())
+            .AddViewModels()
             .AddSingleton<MainWindow>()
             .BuildServiceProvider();
 
