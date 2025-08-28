@@ -47,24 +47,33 @@
                         FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
                         UsePickerType="OpenFile"
                         SuggestedStartPath="{Binding StartPath}"
-                        Command="{Binding OpenUAssetCommand}" />
+                        Command="{Binding OpenUAssetCommand}">
+                        <u:PathPicker.Styles>
+                            <Style Selector="TextBox#PART_TextBox">
+                                <Setter Property="IsReadOnly" Value="True" />
+                            </Style>
+                        </u:PathPicker.Styles>
+                    </u:PathPicker>
                 </u:FormItem>
                 <TextBox
                     Width="525"
                     u:FormItem.Label="New Mesh Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding MeshPath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="New Blood Splatter Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding BloodSplatterPath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="New Scabbard Path:"
-                    Text="{Binding ScabbardPath}"
-                    IsEnabled="{Binding HasScabbard}" />
+                    IsEnabled="{Binding IsLoadedHasScabbard}"
+                    Text="{Binding ScabbardPath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="Main Form Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding FormPath}" />
             </u:Form>
 
@@ -82,19 +91,28 @@
                         FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
                         UsePickerType="OpenFile"
                         SuggestedStartPath="{Binding StartPath}"
-                        Command="{Binding OpenUAssetCommand}" />
+                        Command="{Binding OpenUAssetCommand}">
+                        <u:PathPicker.Styles>
+                            <Style Selector="TextBox#PART_TextBox">
+                                <Setter Property="IsReadOnly" Value="True" />
+                            </Style>
+                        </u:PathPicker.Styles>
+                    </u:PathPicker>
                 </u:FormItem>
                 <TextBox
                     Width="525"
                     u:FormItem.Label="New Icon Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding IconPath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="New Blueprint Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding BlueprintPath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="Main Form Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding FormPath}" />
             </u:Form>
 
@@ -112,19 +130,28 @@
                         FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
                         UsePickerType="OpenFile"
                         SuggestedStartPath="{Binding StartPath}"
-                        Command="{Binding OpenUAssetCommand}" />
+                        Command="{Binding OpenUAssetCommand}">
+                        <u:PathPicker.Styles>
+                            <Style Selector="TextBox#PART_TextBox">
+                                <Setter Property="IsReadOnly" Value="True" />
+                            </Style>
+                        </u:PathPicker.Styles>
+                    </u:PathPicker>
                 </u:FormItem>
                 <TextBox
                     Width="525"
                     u:FormItem.Label="New Diffuse Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding DiffusePath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="New NNRM Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding NNRMPath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="Main Form Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding FormPath}" />
             </u:Form>
 
@@ -142,15 +169,23 @@
                         FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
                         UsePickerType="OpenFile"
                         SuggestedStartPath="{Binding StartPath}"
-                        Command="{Binding OpenUAssetCommand}" />
+                        Command="{Binding OpenUAssetCommand}">
+                        <u:PathPicker.Styles>
+                            <Style Selector="TextBox#PART_TextBox">
+                                <Setter Property="IsReadOnly" Value="True" />
+                            </Style>
+                        </u:PathPicker.Styles>
+                    </u:PathPicker>
                 </u:FormItem>
                 <TextBox
                     Width="525"
                     u:FormItem.Label="Parent Material Instance Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding MaterialInstancePath}" />
                 <TextBox
                     Width="525"
                     u:FormItem.Label="Main Form Path:"
+                    IsEnabled="{Binding IsLoaded}"
                     Text="{Binding FormPath}" />
             </u:Form>
 

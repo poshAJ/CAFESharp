@@ -43,6 +43,9 @@ public partial class BlueprintViewModel (
             ? true
             : false;
     }
+    public bool IsLoadedHasScabbard {
+        get => IsLoaded && HasScabbard;
+    }
     public string MeshPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasScabbard]["Mesh_Path"],

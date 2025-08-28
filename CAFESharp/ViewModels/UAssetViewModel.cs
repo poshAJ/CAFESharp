@@ -38,6 +38,9 @@ public partial class UAssetViewModel : BaseViewModel {
     public string FileName {
         get => Path.GetFileName(path: FilePath);
     }
+    public bool IsLoaded {
+        get => !string.IsNullOrEmpty(FilePath);
+    }
 
     #endregion Properties
 
