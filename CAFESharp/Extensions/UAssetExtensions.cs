@@ -12,8 +12,7 @@ public static class UAssetExtensions {
     ) {
         FString fString = uasset.GetNameReference(index: index);
 
-        if (!fString.Value.StartsWith("/Game/"))
-            onError?.Invoke();
+        if (!fString.Value.StartsWith(value: "/Game/")) onError?.Invoke();
 
         return fString.Value;
     }

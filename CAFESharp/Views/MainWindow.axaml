@@ -28,11 +28,12 @@
             Click="OpenGitHub" />
     </u:UrsaWindow.RightContent>
 
-    <!-- @todo this should probably be "MainView" but it works for now -->
+    <!-- should be "MainView.axaml" but lazy -->
     <Viewbox Stretch="Uniform">
         <StackPanel
             HorizontalAlignment="Left"
             Margin="25">
+            <!-- should be "BlueprintView.axaml" but lazy -->
             <u:Divider Content="1. Blueprint Asset" />
             <u:Form
                 LabelPosition="Left"
@@ -77,6 +78,7 @@
                     Text="{Binding FormPath}" />
             </u:Form>
 
+            <!-- should be "WeaponView.axaml" but lazy -->
             <u:Divider Content="2. Weapon Asset" />
             <u:Form
                 LabelPosition="Left"
@@ -116,6 +118,7 @@
                     Text="{Binding FormPath}" />
             </u:Form>
 
+            <!-- should be "MaterialInstanceView.axaml" but lazy -->
             <u:Divider Content="3. Material Instance Asset" />
             <u:Form
                 LabelPosition="Left"
@@ -155,6 +158,7 @@
                     Text="{Binding FormPath}" />
             </u:Form>
 
+            <!-- should be "BloodSplatterView.axaml" but lazy -->
             <u:Divider Content="4. Blood Splatter Asset" />
             <u:Form
                 LabelPosition="Left"

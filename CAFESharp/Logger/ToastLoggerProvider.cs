@@ -9,13 +9,18 @@ public sealed class ToastLoggerProvider (
 ) : ILoggerProvider {
     #region Fields
 
-    private readonly ConcurrentDictionary<string, ToastLogger> _loggers = new(StringComparer.OrdinalIgnoreCase);
+    private readonly ConcurrentDictionary<string, ToastLogger> _loggers = new(
+        comparer: StringComparer.OrdinalIgnoreCase
+    );
 
     #endregion Fields
 
     #region ILoggerProvider Members
 
-    public ILogger CreateLogger (string categoryName) => _loggers.GetOrAdd(categoryName, new ToastLogger(serviceProvider));
+    public ILogger CreateLogger (string categoryName) => _loggers.GetOrAdd(
+        key: categoryName,
+        value: new ToastLogger(serviceProvider)
+    );
 
     public void Dispose () => _loggers.Clear();
 

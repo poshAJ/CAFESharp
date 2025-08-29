@@ -37,7 +37,7 @@ public partial class BlueprintViewModel (
 
     #region Properties
 
-    // starting with a very naive approach and hoping there aren't a bunch of different mappings
+    // naive approach and hoping there aren't a bunch of different mappings
     public bool HasScabbard {
         get => _uasset.GetNameMapIndexList().Count > 55
             ? true
@@ -49,7 +49,9 @@ public partial class BlueprintViewModel (
     public string MeshPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasScabbard]["Mesh_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'MeshPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'MeshPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: MeshPath,
@@ -59,14 +61,18 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Mesh_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'MeshPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'MeshPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Mesh_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'MeshName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'MeshName'."
+                    )
                 );
             }
         );
@@ -74,7 +80,9 @@ public partial class BlueprintViewModel (
     public string BloodSplatterPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasScabbard]["BloodSplatter_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'BloodSplatterPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'BloodSplatterPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: BloodSplatterPath,
@@ -84,14 +92,18 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["BloodSplatter_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'BloodSplatterPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'BloodSplatterPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["BloodSplatter_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'BloodSplatterName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'BloodSplatterName'."
+                    )
                 );
             }
         );
@@ -100,7 +112,9 @@ public partial class BlueprintViewModel (
         get => HasScabbard
             ? _uasset.TryGetNameReferenceValue(
                 index: INDEX[HasScabbard]["Scabbard_Path"],
-                onError: () => logger.LogWarning(message: "The value retrieved for 'ScabbardPath' does not appear valid.")
+                onError: () => logger.LogWarning(
+                    message: "The value retrieved for 'ScabbardPath' does not appear valid."
+                )
             )
             : string.Empty;
         set => SetProperty(
@@ -113,14 +127,18 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Scabbard_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'ScabbardPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'ScabbardPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Scabbard_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'ScabbardName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'ScabbardName'."
+                    )
                 );
             }
         );
@@ -128,7 +146,9 @@ public partial class BlueprintViewModel (
     public string FormPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasScabbard]["Form_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'FormPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'FormPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: FormPath,
@@ -138,19 +158,25 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Form_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'FormPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'FormPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Form_Name_C"],
                     value: $"{name}_C",
-                    onError: () => logger.LogError(message: "An error occured while setting 'FormName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'FormName'."
+                    )
                 );
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Form_Default__Name_C"],
                     value: $"DEFAULT__{name}_C",
-                    onError: () => logger.LogError(message: "An error occured while setting 'FormName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'FormName'."
+                    )
                 );
             }
         );

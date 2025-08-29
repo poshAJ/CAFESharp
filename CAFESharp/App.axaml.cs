@@ -14,7 +14,7 @@ public partial class App : Application {
     #region Application Members
 
     public override void Initialize () {
-        AvaloniaXamlLoader.Load(this);
+        AvaloniaXamlLoader.Load(obj: this);
     }
 
     public override void OnFrameworkInitializationCompleted () {
@@ -48,8 +48,9 @@ public partial class App : Application {
                 .OfType<DataAnnotationsValidationPlugin>()
         ];
 
-        foreach (var plugin in dataValidationPluginsToRemove)
-            BindingPlugins.DataValidators.Remove(plugin);
+        foreach (var plugin in dataValidationPluginsToRemove) {
+            BindingPlugins.DataValidators.Remove(item: plugin);
+        }
     }
 
     #endregion Private Methods

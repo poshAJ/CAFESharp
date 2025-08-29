@@ -33,7 +33,7 @@ public partial class MaterialInstanceViewModel (
 
     #region Properties
 
-    // starting with a very naive approach and hoping there aren't a bunch of different mappings
+    // naive approach and hoping there aren't a bunch of different mappings
     public bool HasNNRE {
         get => _uasset.GetNameMapIndexList().Count > 26
             ? true
@@ -42,7 +42,9 @@ public partial class MaterialInstanceViewModel (
     public string DiffusePath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasNNRE]["Diffuse_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'DiffusePath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'DiffusePath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: DiffusePath,
@@ -52,14 +54,18 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Diffuse_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'DiffusePath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'DiffusePath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Diffuse_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'DiffuseName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'DiffuseName'."
+                    )
                 );
             }
         );
@@ -67,7 +73,9 @@ public partial class MaterialInstanceViewModel (
     public string NNRMPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasNNRE]["NNRM_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'NNRMPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'NNRMPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: NNRMPath,
@@ -77,14 +85,18 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["NNRM_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'NNRMPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'NNRMPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["NNRM_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'NNRMName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'NNRMName'."
+                    )
                 );
             }
         );
@@ -92,7 +104,9 @@ public partial class MaterialInstanceViewModel (
     public string FormPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasNNRE]["Form_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'FormPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'FormPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: FormPath,
@@ -102,14 +116,18 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Form_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'FormPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'FormPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Form_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'FormName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'FormName'."
+                    )
                 );
             }
         );

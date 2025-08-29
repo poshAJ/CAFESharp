@@ -19,13 +19,13 @@ public partial class MainWindow : UrsaWindow {
 
         DataContext = mainViewModel;
 
-        ToastManager = new(this);
+        ToastManager = new(host: this);
     }
 
     #endregion Constructors
 
-    private async void OpenGitHub (object? sender, RoutedEventArgs e) =>
+    private async void OpenGitHub (object? sender, RoutedEventArgs args) =>
         await Launcher.LaunchUriAsync(
-            new Uri("https://github.com/poshAJ/CAFESharp")
+            uri: new Uri("https://github.com/poshAJ/CAFESharp")
         );
 }

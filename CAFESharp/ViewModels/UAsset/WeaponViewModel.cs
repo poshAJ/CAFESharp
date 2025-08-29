@@ -27,7 +27,9 @@ public partial class WeaponViewModel (
     public string IconPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX["Icon_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'IconPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'IconPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: IconPath,
@@ -37,14 +39,18 @@ public partial class WeaponViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Icon_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'IconPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'IconPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Icon_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'IconName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'IconName'."
+                    )
                 );
             }
         );
@@ -52,7 +58,9 @@ public partial class WeaponViewModel (
     public string BlueprintPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX["Blueprint_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'BlueprintPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'BlueprintPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: BlueprintPath,
@@ -62,19 +70,25 @@ public partial class WeaponViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Blueprint_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'BlueprintPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'BlueprintPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Blueprint_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'BlueprintName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'BlueprintName'."
+                    )
                 );
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Blueprint_Name_C"],
                     value: $"{name}_C",
-                    onError: () => logger.LogError(message: "An error occured while setting 'BlueprintName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'BlueprintName'."
+                    )
                 );
             }
         );
@@ -82,7 +96,9 @@ public partial class WeaponViewModel (
     public string FormPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX["Form_Path"],
-            onError: () => logger.LogWarning(message: "The value retrieved for 'FormPath' does not appear valid.")
+            onError: () => logger.LogWarning(
+                message: "The value retrieved for 'FormPath' does not appear valid."
+            )
         );
         set => SetProperty(
             oldValue: FormPath,
@@ -92,14 +108,18 @@ public partial class WeaponViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Form_Path"],
                     value: path,
-                    onError: () => logger.LogError(message: "An error occured while setting 'FormPath'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'FormPath'."
+                    )
                 );
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Form_Name"],
                     value: name,
-                    onError: () => logger.LogError(message: "An error occured while setting 'FormName'.")
+                    onError: () => logger.LogError(
+                        message: "An error occured while setting 'FormName'."
+                    )
                 );
             }
         );

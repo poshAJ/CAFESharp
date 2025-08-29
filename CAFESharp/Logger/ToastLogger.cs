@@ -14,9 +14,16 @@ public sealed class ToastLogger (
 
     public IDisposable? BeginScope<TState> (TState state) where TState : notnull => default!;
 
+    // should have an actual implementation but lazy
     public bool IsEnabled (LogLevel logLevel) => true;
 
-    public void Log<TState> (LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter) {
+    public void Log<TState> (
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception? exception,
+        Func<TState, Exception?, string> formatter
+    ) {
         WindowToastManager toastManager = serviceProvider.GetRequiredService<MainWindow>().ToastManager;
 
         Toast toast = new($"{formatter(state, exception)}");

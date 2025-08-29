@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 namespace CAFESharp.ViewModels;
 
 public partial class MainViewModel (
-        ILogger<MainViewModel> logger,
-        BlueprintViewModel blueprintViewModel,
-        WeaponViewModel weaponViewModel,
-        MaterialInstanceViewModel materialInstanceViewModel,
-        BloodSplatterViewModel bloodSplatterViewModel
+    ILogger<MainViewModel> logger,
+    BlueprintViewModel blueprintViewModel,
+    WeaponViewModel weaponViewModel,
+    MaterialInstanceViewModel materialInstanceViewModel,
+    BloodSplatterViewModel bloodSplatterViewModel
 ) : BaseViewModel {
     #region Properties
 
@@ -31,17 +31,19 @@ public partial class MainViewModel (
         ];
 
         foreach (var viewModel in viewModels) {
-            if (string.IsNullOrEmpty(viewModel.FilePath))
-                continue;
+            if (string.IsNullOrEmpty(viewModel.FilePath)) continue;
 
             try {
                 viewModel._uasset.Write(viewModel.FilePath);
 
-                logger.LogInformation(message: "Saved '{FileName}'.", viewModel.FileName);
+                logger.LogInformation(
+                    message: "Saved '{FileName}'.", viewModel.FileName
+                );
             } catch {
-                logger.LogError(message: "An error occured while saving '{FileName}'.", viewModel.FileName);
+                logger.LogError(
+                    message: "An error occured while saving '{FileName}'.", viewModel.FileName
+                );
             }
-
         }
     }
 

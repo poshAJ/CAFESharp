@@ -17,8 +17,9 @@ public partial class UAssetViewModel : BaseViewModel {
 
     #region Properties
 
-    public string StartPath { get; } = Environment
-        .GetFolderPath(folder: Environment.SpecialFolder.UserProfile);
+    public string StartPath { get; } = Environment.GetFolderPath(
+        folder: Environment.SpecialFolder.UserProfile
+    );
     public string FilePath {
         get => _uasset.FilePath;
         set => SetProperty(
@@ -39,7 +40,7 @@ public partial class UAssetViewModel : BaseViewModel {
         get => Path.GetFileName(path: FilePath);
     }
     public bool IsLoaded {
-        get => !string.IsNullOrEmpty(FilePath);
+        get => !string.IsNullOrEmpty(value: FilePath);
     }
 
     #endregion Properties
@@ -50,8 +51,9 @@ public partial class UAssetViewModel : BaseViewModel {
         PropertyInfo[] properties = GetType()
             .GetProperties(bindingAttr: BindingFlags.Instance | BindingFlags.Public);
 
-        foreach (var property in properties)
+        foreach (var property in properties) {
             OnPropertyChanged(propertyName: property.Name);
+        }
     }
 
     #endregion Private Methods
