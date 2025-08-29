@@ -53,15 +53,14 @@ jobs:
           cp ./LICENSE.md ./Output/CAFE_${{ matrix.runtime }}
           cp ./THIRD-PARTY-NOTICES.md ./Output/CAFE_${{ matrix.runtime }}
 
-      - name: Change Directory
-        run: cd ./Output
-
       - name: Archive Package
         if: matrix.runtime == 'win-x64'
+        working-directory: ./Output
         run: zip -9r CAFE_${{ matrix.runtime }}.zip CAFE_${{ matrix.runtime }}
 
       - name: Archive Package
         if: matrix.runtime == 'linux-x64'
+        working-directory: ./Output
         run: tar -cJf CAFE_${{ matrix.runtime }}.tar.xz CAFE_${{ matrix.runtime }}
 
       - name: Upload Artifacts
