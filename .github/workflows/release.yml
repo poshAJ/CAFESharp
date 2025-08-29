@@ -24,7 +24,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: 8.0.x
 
       - name: Setup Variables
         run: |
@@ -57,11 +57,11 @@ jobs:
         run: cd ./Output
 
       - name: Archive Package
-        if: matrix.runtime == "win-x64"
+        if: matrix.runtime == 'win-x64'
         run: zip -9r CAFE_${{ matrix.runtime }}.zip CAFE_${{ matrix.runtime }}
 
       - name: Archive Package
-        if: matrix.runtime == "linux-x64"
+        if: matrix.runtime == 'linux-x64'
         run: tar -cJf CAFE_${{ matrix.runtime }}.tar.xz CAFE_${{ matrix.runtime }}
 
       - name: Upload Artifacts
