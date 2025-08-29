@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+    <AssemblyName>CAFE</AssemblyName>
+    <Product>CAFE</Product>
+    <Copyright>Copyright (c) 2025 Ethan "CosmicBoogaloo", Anthony J. Raymond</Copyright>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Optimize>true</Optimize>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -31,4 +35,11 @@
     <PackageReference Include="Semi.Avalonia" Version="11.2.1.9" />
     <ProjectReference Include="..\UAssetAPI\UAssetAPI\UAssetAPI.csproj" />
   </ItemGroup>
+
+  <Target Name="RemovePdbFiles" AfterTargets="Publish">
+    <ItemGroup>
+      <PublishedPdbFiles Include="$(PublishDir)**\*.pdb" />
+    </ItemGroup>
+    <Delete Files="@(PublishedPdbFiles)" />
+  </Target>
 </Project>
