@@ -1,5 +1,7 @@
 # Third Party Notices
 
+This project may contain trademarks or logos for projects, products, or services. Any use of third-party trademarks or logos are subject to those third-party’s policies.
+
 ## License Notice for Avalonia
 
 <https://github.com/AvaloniaUI/Avalonia/blob/master/licence.md>

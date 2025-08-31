@@ -21,11 +21,29 @@
     </u:UrsaWindow.TitleBarContent>
 
     <u:UrsaWindow.RightContent>
-        <u:IconButton
-            Theme="{StaticResource BorderlessIconButton}"
-            Classes="Tertiary"
-            Icon="{StaticResource SemiIconGithubLogo}"
-            Click="OpenGitHub" />
+        <StackPanel Orientation="Horizontal">
+            <u:IconButton
+                Theme="{StaticResource BorderlessIconButton}"
+                Classes="Tertiary"
+                Click="OpenNexus">
+                <u:IconButton.Icon>
+                    <Image
+                        Width="16" Height="16"
+                        Source="/Assets/nexus-icon.ico" />
+                </u:IconButton.Icon>
+            </u:IconButton>
+
+            <u:IconButton
+                Theme="{StaticResource BorderlessIconButton}"
+                Classes="Tertiary"
+                Click="OpenGitHub">
+                <u:IconButton.Icon>
+                    <Image
+                        Width="16" Height="16"
+                        Source="/Assets/github-icon.ico" />
+                </u:IconButton.Icon>
+            </u:IconButton>
+        </StackPanel>
     </u:UrsaWindow.RightContent>
 
     <!-- should be "MainView.axaml" but lazy -->

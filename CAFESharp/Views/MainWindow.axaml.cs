@@ -24,8 +24,15 @@ public partial class MainWindow : UrsaWindow {
 
     #endregion Constructors
 
-    private async void OpenGitHub (object? sender, RoutedEventArgs args) =>
-        await Launcher.LaunchUriAsync(
-            uri: new Uri("https://github.com/poshAJ/CAFESharp")
-        );
+    #region Handlers
+
+    private async void OpenGitHub (object? sender, RoutedEventArgs args) => await Launcher.LaunchUriAsync(
+        uri: new Uri("https://github.com/poshAJ/CAFESharp")
+    );
+
+    private async void OpenNexus (object? sender, RoutedEventArgs args) => await Launcher.LaunchUriAsync(
+        uri: new Uri("https://www.nexusmods.com/oblivionremastered/mods/4891")
+    );
+
+    #endregion Handlers
 }
