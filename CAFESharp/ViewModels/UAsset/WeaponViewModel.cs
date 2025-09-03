@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using CAFESharp.Extensions;
 using Microsoft.Extensions.Logging;
+using UAssetAPI.UnrealTypes;
 
 namespace CAFESharp.ViewModels;
 
@@ -112,6 +113,8 @@ public partial class WeaponViewModel (
                         message: "An error occured while setting 'FormPath'."
                     )
                 );
+
+                uasset.FolderName = (FString) path;
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
