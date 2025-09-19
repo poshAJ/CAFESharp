@@ -50,7 +50,7 @@ public partial class BlueprintViewModel (
     public string MeshPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasScabbard]["Mesh_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'MeshPath' does not appear valid."
             )
         );
@@ -62,7 +62,7 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Mesh_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'MeshPath'."
                     )
                 );
@@ -71,7 +71,7 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Mesh_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'MeshName'."
                     )
                 );
@@ -81,7 +81,7 @@ public partial class BlueprintViewModel (
     public string BloodSplatterPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasScabbard]["BloodSplatter_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'BloodSplatterPath' does not appear valid."
             )
         );
@@ -93,7 +93,7 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["BloodSplatter_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'BloodSplatterPath'."
                     )
                 );
@@ -102,7 +102,7 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["BloodSplatter_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'BloodSplatterName'."
                     )
                 );
@@ -113,7 +113,7 @@ public partial class BlueprintViewModel (
         get => HasScabbard
             ? _uasset.TryGetNameReferenceValue(
                 index: INDEX[HasScabbard]["Scabbard_Path"],
-                onError: () => logger.LogWarning(
+                onError: (_) => logger.LogWarning(
                     message: "The value retrieved for 'ScabbardPath' does not appear valid."
                 )
             )
@@ -128,7 +128,7 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Scabbard_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'ScabbardPath'."
                     )
                 );
@@ -137,7 +137,7 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Scabbard_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'ScabbardName'."
                     )
                 );
@@ -147,7 +147,7 @@ public partial class BlueprintViewModel (
     public string FormPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasScabbard]["Form_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'FormPath' does not appear valid."
             )
         );
@@ -159,7 +159,7 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Form_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormPath'."
                     )
                 );
@@ -170,14 +170,14 @@ public partial class BlueprintViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Form_Name_C"],
                     value: $"{name}_C",
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormName'."
                     )
                 );
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasScabbard]["Form_Default__Name_C"],
                     value: $"DEFAULT__{name}_C",
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormName'."
                     )
                 );

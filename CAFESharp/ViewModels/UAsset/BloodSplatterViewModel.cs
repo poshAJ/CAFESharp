@@ -25,7 +25,7 @@ public partial class BloodSplatterViewModel (
     public string MaterialInstancePath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX["MaterialInstance_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'MaterialInstancePath' does not appear valid."
             )
         );
@@ -37,7 +37,7 @@ public partial class BloodSplatterViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["MaterialInstance_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'MaterialInstancePath'."
                     )
                 );
@@ -46,7 +46,7 @@ public partial class BloodSplatterViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["MaterialInstance_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'MaterialInstanceName'."
                     )
                 );
@@ -56,7 +56,7 @@ public partial class BloodSplatterViewModel (
     public string FormPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX["Form_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'FormPath' does not appear valid."
             )
         );
@@ -68,7 +68,7 @@ public partial class BloodSplatterViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Form_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormPath'."
                     )
                 );
@@ -79,7 +79,7 @@ public partial class BloodSplatterViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX["Form_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormName'."
                     )
                 );

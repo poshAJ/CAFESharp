@@ -43,7 +43,7 @@ public partial class MaterialInstanceViewModel (
     public string DiffusePath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasNNRE]["Diffuse_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'DiffusePath' does not appear valid."
             )
         );
@@ -55,7 +55,7 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Diffuse_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'DiffusePath'."
                     )
                 );
@@ -64,7 +64,7 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Diffuse_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'DiffuseName'."
                     )
                 );
@@ -74,7 +74,7 @@ public partial class MaterialInstanceViewModel (
     public string NNRMPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasNNRE]["NNRM_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'NNRMPath' does not appear valid."
             )
         );
@@ -86,7 +86,7 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["NNRM_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'NNRMPath'."
                     )
                 );
@@ -95,7 +95,7 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["NNRM_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'NNRMName'."
                     )
                 );
@@ -105,7 +105,7 @@ public partial class MaterialInstanceViewModel (
     public string FormPath {
         get => _uasset.TryGetNameReferenceValue(
             index: INDEX[HasNNRE]["Form_Path"],
-            onError: () => logger.LogWarning(
+            onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'FormPath' does not appear valid."
             )
         );
@@ -117,7 +117,7 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Form_Path"],
                     value: path,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormPath'."
                     )
                 );
@@ -128,7 +128,7 @@ public partial class MaterialInstanceViewModel (
                 uasset.TrySetNameReferenceValue(
                     index: INDEX[HasNNRE]["Form_Name"],
                     value: name,
-                    onError: () => logger.LogError(
+                    onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormName'."
                     )
                 );

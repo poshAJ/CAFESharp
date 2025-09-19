@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UAssetAPI;
 using UAssetAPI.UnrealTypes;
 
@@ -8,11 +9,11 @@ public static class UAssetExtensions {
     public static string TryGetNameReferenceValue (
         this UAsset uasset,
         int index,
-        Action? onError
+        Action<Exception>? onError
     ) {
         FString fString = uasset.GetNameReference(index: index);
 
-        if (!fString.Value.StartsWith(value: "/Game/")) onError?.Invoke();
+        if (!fString.Value.StartsWith(value: "/Game/")) onError?.Invoke(new KeyNotFoundException());
 
         return fString.Value;
     }
@@ -21,15 +22,15 @@ public static class UAssetExtensions {
         this UAsset uasset,
         int index,
         string value,
-        Action? onError
+        Action<Exception>? onError
     ) {
         try {
             uasset.SetNameReference(
                 index: index,
                 value: (FString) value
             );
-        } catch {
-            onError?.Invoke();
+        } catch (Exception exception) {
+            onError?.Invoke(exception);
         }
     }
 }
