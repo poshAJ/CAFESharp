@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using CAFESharp.Extensions;
 using Microsoft.Extensions.Logging;
 using UAssetAPI.UnrealTypes;
@@ -9,25 +11,17 @@ namespace CAFESharp.ViewModels;
 public partial class WeaponViewModel (
     ILogger<WeaponViewModel> logger
 ) : UAssetViewModel {
-    #region Constants
+    #region Fields
 
-    private readonly Dictionary<string, int> INDEX = new() {
-        { "Icon_Path", 0 },
-        { "Icon_Name", 4 },
-        { "Blueprint_Path", 1 },
-        { "Blueprint_Name", 2 },
-        { "Blueprint_Name_C", 3 },
-        { "Form_Path", 7 },
-        { "Form_Name", 5 }
-    };
+    private Dictionary<string, int> _map = [];
 
-    #endregion Constants
+    #endregion Fields
 
     #region Properties
 
     public string IconPath {
         get => _uasset.TryGetNameReferenceValue(
-            index: INDEX["Icon_Path"],
+            index: _map["Icon_Path"],
             onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'IconPath' does not appear valid."
             )
@@ -38,7 +32,7 @@ public partial class WeaponViewModel (
             model: _uasset,
             callback: (uasset, path) => {
                 uasset.TrySetNameReferenceValue(
-                    index: INDEX["Icon_Path"],
+                    index: _map["Icon_Path"],
                     value: path,
                     onError: (_) => logger.LogError(
                         message: "An error occured while setting 'IconPath'."
@@ -47,7 +41,7 @@ public partial class WeaponViewModel (
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
-                    index: INDEX["Icon_Name"],
+                    index: _map["Icon_Name"],
                     value: name,
                     onError: (_) => logger.LogError(
                         message: "An error occured while setting 'IconName'."
@@ -58,7 +52,7 @@ public partial class WeaponViewModel (
     }
     public string BlueprintPath {
         get => _uasset.TryGetNameReferenceValue(
-            index: INDEX["Blueprint_Path"],
+            index: _map["Blueprint_Path"],
             onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'BlueprintPath' does not appear valid."
             )
@@ -69,7 +63,7 @@ public partial class WeaponViewModel (
             model: _uasset,
             callback: (uasset, path) => {
                 uasset.TrySetNameReferenceValue(
-                    index: INDEX["Blueprint_Path"],
+                    index: _map["Blueprint_Path"],
                     value: path,
                     onError: (_) => logger.LogError(
                         message: "An error occured while setting 'BlueprintPath'."
@@ -78,14 +72,14 @@ public partial class WeaponViewModel (
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
-                    index: INDEX["Blueprint_Name"],
+                    index: _map["Blueprint_Name"],
                     value: name,
                     onError: (_) => logger.LogError(
                         message: "An error occured while setting 'BlueprintName'."
                     )
                 );
                 uasset.TrySetNameReferenceValue(
-                    index: INDEX["Blueprint_Name_C"],
+                    index: _map["Blueprint_Name_C"],
                     value: $"{name}_C",
                     onError: (_) => logger.LogError(
                         message: "An error occured while setting 'BlueprintName'."
@@ -96,7 +90,7 @@ public partial class WeaponViewModel (
     }
     public string FormPath {
         get => _uasset.TryGetNameReferenceValue(
-            index: INDEX["Form_Path"],
+            index: _map["Form_Path"],
             onError: (_) => logger.LogWarning(
                 message: "The value retrieved for 'FormPath' does not appear valid."
             )
@@ -107,7 +101,7 @@ public partial class WeaponViewModel (
             model: _uasset,
             callback: (uasset, path) => {
                 uasset.TrySetNameReferenceValue(
-                    index: INDEX["Form_Path"],
+                    index: _map["Form_Path"],
                     value: path,
                     onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormPath'."
@@ -118,7 +112,7 @@ public partial class WeaponViewModel (
 
                 string name = Path.GetFileNameWithoutExtension(path: path);
                 uasset.TrySetNameReferenceValue(
-                    index: INDEX["Form_Name"],
+                    index: _map["Form_Name"],
                     value: name,
                     onError: (_) => logger.LogError(
                         message: "An error occured while setting 'FormName'."
@@ -129,4 +123,58 @@ public partial class WeaponViewModel (
     }
 
     #endregion Properties
+
+    #region Regular Expressions
+
+    [GeneratedRegex("/T_\\w+$", RegexOptions.IgnoreCase | RegexOptions.Compiled, "en-US")]
+    private static partial Regex IconPathRegex ();
+    [GeneratedRegex("^T_\\w+$", RegexOptions.IgnoreCase | RegexOptions.Compiled, "en-US")]
+    private static partial Regex IconNameRegex ();
+    [GeneratedRegex("/BP_\\w+$", RegexOptions.IgnoreCase | RegexOptions.Compiled, "en-US")]
+    private static partial Regex BlueprintPathRegex ();
+    [GeneratedRegex("^BP_\\w+(?<!_C)$", RegexOptions.IgnoreCase | RegexOptions.Compiled, "en-US")]
+    private static partial Regex BlueprintNameRegex ();
+    [GeneratedRegex("^BP_\\w+_C$", RegexOptions.IgnoreCase | RegexOptions.Compiled, "en-US")]
+    private static partial Regex BlueprintNameCRegex ();
+    [GeneratedRegex("/Weap\\w+$", RegexOptions.IgnoreCase | RegexOptions.Compiled, "en-US")]
+    private static partial Regex FormPathRegex ();
+    [GeneratedRegex("^Weap\\w+$", RegexOptions.IgnoreCase | RegexOptions.Compiled, "en-US")]
+    private static partial Regex FormNameRegex ();
+
+    #endregion Regular Expressions
+
+    #region Protected Methods
+
+    protected override void MapNameReferences () {
+        List<string> list = _uasset.GetNameMapIndexList().Select(x => x.Value).ToList();
+
+        Dictionary<string, Regex> patterns = new() {
+            { "Icon_Path", IconPathRegex() },
+            { "Icon_Name", IconNameRegex() },
+            { "Blueprint_Path", BlueprintPathRegex() },
+            { "Blueprint_Name", BlueprintNameRegex() },
+            { "Blueprint_Name_C", BlueprintNameCRegex() },
+            { "Form_Path", FormPathRegex() },
+            { "Form_Name", FormNameRegex() }
+    };
+
+        foreach (KeyValuePair<string, Regex> pattern in patterns) {
+            int index = list.FindIndex(pattern.Value.IsMatch);
+
+            if (index == -1) {
+                logger.LogError(
+                    message: "An error occured while mapping '{key}'.",
+                    args: pattern.Key
+                );
+
+                _map.Clear();
+
+                break;
+            }
+
+            _map[pattern.Key] = index;
+        }
+    }
+
+    #endregion Protected Methods
 }

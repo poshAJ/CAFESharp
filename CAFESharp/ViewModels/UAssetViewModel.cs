@@ -8,7 +8,7 @@ using UAssetAPI.UnrealTypes;
 
 namespace CAFESharp.ViewModels;
 
-public partial class UAssetViewModel : BaseViewModel {
+public abstract partial class UAssetViewModel : BaseViewModel {
     #region Fields
 
     internal UAsset _uasset = new();
@@ -32,6 +32,7 @@ public partial class UAssetViewModel : BaseViewModel {
                     engineVersion: EngineVersion.VER_UE5_3
                 );
 
+                MapNameReferences();
                 RefreshAllProperties();
             }
         );
@@ -44,6 +45,12 @@ public partial class UAssetViewModel : BaseViewModel {
     }
 
     #endregion Properties
+
+    #region Protected Methods
+
+    protected abstract void MapNameReferences ();
+
+    #endregion Protected Methods
 
     #region Private Methods
 
