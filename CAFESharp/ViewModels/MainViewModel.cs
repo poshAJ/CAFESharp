@@ -31,7 +31,9 @@ public partial class MainViewModel (
         ];
 
         foreach (var viewModel in viewModels) {
-            if (string.IsNullOrEmpty(viewModel.FilePath)) continue;
+            if (string.IsNullOrEmpty(viewModel.FilePath)) {
+                continue;
+            }
 
             try {
                 viewModel._uasset.Write(viewModel.FilePath);

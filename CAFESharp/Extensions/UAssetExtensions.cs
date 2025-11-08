@@ -13,7 +13,9 @@ public static class UAssetExtensions {
     ) {
         FString fString = uasset.GetNameReference(index: index);
 
-        if (!fString.Value.StartsWith(value: "/Game/")) onError?.Invoke(new KeyNotFoundException());
+        if (!fString.Value.StartsWith(value: "/Game/")) {
+            onError?.Invoke(new KeyNotFoundException());
+        }
 
         return fString.Value;
     }
