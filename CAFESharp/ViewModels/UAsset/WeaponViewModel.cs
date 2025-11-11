@@ -1,3 +1,4 @@
+// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

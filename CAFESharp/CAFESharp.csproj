@@ -7,7 +7,7 @@
     <SelfContained>false</SelfContained>
     <AssemblyName>CAFE</AssemblyName>
     <Product>CAFE</Product>
-    <Copyright>Copyright (c) 2025 Ethan "CosmicBoogaloo", Anthony J. Raymond</Copyright>
+    <Copyright>Copyright (c) 2025 Ethan "CosmicBoogaloo" and Anthony J. Raymond</Copyright>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>

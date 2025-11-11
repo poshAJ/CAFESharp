@@ -1,3 +1,4 @@
+// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
 using CAFESharp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

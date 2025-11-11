@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+using System;
 using Avalonia;
 
 namespace CAFESharp;

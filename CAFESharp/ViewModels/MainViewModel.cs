@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 
 namespace CAFESharp.ViewModels;
