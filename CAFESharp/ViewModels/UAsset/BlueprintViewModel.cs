@@ -215,6 +215,10 @@ public partial class BlueprintViewModel (
         foreach (KeyValuePair<string, Regex> pattern in patterns) {
             int index = list.FindIndex(pattern.Value.IsMatch);
 
+            if (index == -1 && pattern.Key.StartsWith("Scabbard_")) {
+                continue;
+            }
+
             if (index == -1) {
                 logger.LogError(
                     message: "An error occured while mapping '{key}'.",
