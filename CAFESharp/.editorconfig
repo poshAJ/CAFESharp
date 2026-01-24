@@ -1,7 +1,17 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
 [*.cs]
-csharp_new_line_before_open_brace = none
-csharp_new_line_before_else = false
-csharp_new_line_before_catch = false
-csharp_new_line_before_finally = false
+indent_size = 4
+dotnet_sort_system_directives_first = true
 csharp_space_after_cast = true
 csharp_space_between_method_declaration_name_and_open_parenthesis = true
+csharp_new_line_before_catch = false
+csharp_new_line_before_else = false
+csharp_new_line_before_finally = false
+csharp_new_line_before_open_brace = none
