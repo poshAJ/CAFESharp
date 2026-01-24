@@ -1,16 +1,19 @@
-﻿// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+// Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License
 using System;
 using Avalonia;
 
 namespace CAFESharp;
 
-sealed class Program {
+public sealed class Program {
+    #region Main
+
     [STAThread]
-    public static void Main (string[] args) =>
-        AppBuilder
-            .Configure<App>()
-            .UsePlatformDetect()
-            .WithInterFont()
-            .LogToTrace()
-            .StartWithClassicDesktopLifetime(args);
+    public static void Main (string[] args) => AppBuilder
+        .Configure<App>()
+        .UsePlatformDetect()
+        .WithInterFont()
+        .LogToTrace()
+        .StartWithClassicDesktopLifetime(args);
+
+    #endregion Main
 }

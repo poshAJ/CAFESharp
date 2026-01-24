@@ -1,4 +1,4 @@
-// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+// Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License
 using System;
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
