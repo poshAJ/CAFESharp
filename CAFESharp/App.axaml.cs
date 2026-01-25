@@ -1,4 +1,4 @@
-// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+// Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License
 using System;
 using System.Linq;
 using Avalonia;
@@ -11,7 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CAFESharp;
 
-public partial class App : Application {
+public sealed partial class App : Application {
+    #region Properties
+
+    public static IServiceProvider Services { get; private set; } = null!;
+
+    #endregion Properties
+
     #region Application Members
 
     public override void Initialize () {
@@ -19,7 +25,7 @@ public partial class App : Application {
     }
 
     public override void OnFrameworkInitializationCompleted () {
-        ServiceProvider serviceProvider = new ServiceCollection()
+        Services = new ServiceCollection()
             .AddLogging(builder => builder.AddToastLogging())
             .AddViewModels()
             .AddSingleton<MainWindow>()
@@ -28,7 +34,7 @@ public partial class App : Application {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
             DisableAvaloniaDataAnnotationValidation();
 
-            MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
+            MainWindow mainWindow = Services.GetRequiredService<MainWindow>();
 
             desktop.MainWindow = mainWindow;
         } else {
@@ -40,19 +46,18 @@ public partial class App : Application {
 
     #endregion Application Members
 
-    #region Private Methods
+    #region Methods
 
     private void DisableAvaloniaDataAnnotationValidation () {
-        DataAnnotationsValidationPlugin[] dataValidationPluginsToRemove = [
-            .. BindingPlugins
+        DataAnnotationsValidationPlugin[] dataValidationPluginsToRemove = BindingPlugins
                 .DataValidators
                 .OfType<DataAnnotationsValidationPlugin>()
-        ];
+                .ToArray();
 
         foreach (var plugin in dataValidationPluginsToRemove) {
             BindingPlugins.DataValidators.Remove(item: plugin);
         }
     }
 
-    #endregion Private Methods
+    #endregion Methods
 }

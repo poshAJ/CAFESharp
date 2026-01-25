@@ -1,0 +1,59 @@
+<!-- Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License -->
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:CAFESharp.ViewModels.Armor"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="CAFESharp.Views.Armor.MaterialInstanceView"
+    x:DataType="vm:MaterialInstanceViewModel"
+    u:FormItem.NoLabel="True">
+    <u:FormGroup>
+        <u:FormGroup.Header>
+            <u:Divider Content="3. Material Instance Asset" />
+        </u:FormGroup.Header>
+        <u:FormItem Label="Select Material Instance (.uasset):">
+            <StackPanel Orientation="Horizontal">
+                <u:PathPicker
+                    Width="480"
+                    AllowMultiple="false"
+                    FileFilter="[Unreal&#160;Asset&#160;(*.uasset),*.uasset]"
+                    SuggestedStartPath="{Binding StartPath}"
+                    SuggestedFileName="{Binding FileName}"
+                    SelectedPathsText="{Binding FilePath}"
+                    Classes.Loaded="{Binding IsLoaded}">
+                    <u:PathPicker.Styles>
+                        <Style Selector="u|PathPicker:not(.Loaded)">
+                            <Setter Property="Title" Value="Browse" />
+                            <Setter Property="UsePickerType" Value="OpenFile" />
+                        </Style>
+                        <Style Selector="u|PathPicker.Loaded">
+                            <Setter Property="Title" Value="Save As" />
+                            <Setter Property="UsePickerType" Value="SaveFile" />
+                        </Style>
+                        <Style Selector="TextBox#PART_TextBox">
+                            <Setter Property="IsReadOnly" Value="True" />
+                        </Style>
+                    </u:PathPicker.Styles>
+                </u:PathPicker>
+                <Button
+                    Margin="1 0 0 0"
+                    IsEnabled="{Binding IsLoaded}"
+                    Content="Reset"
+                    Command="{Binding ResetCommand}" />
+            </StackPanel>
+        </u:FormItem>
+        <TextBox
+            u:FormItem.Label="Diffuse Path:"
+            IsEnabled="{Binding IsLoaded}"
+            Text="{Binding DiffusePath}" />
+        <TextBox
+            u:FormItem.Label="NNRM Path:"
+            IsEnabled="{Binding IsLoaded}"
+            Text="{Binding NNRMPath}" />
+        <TextBox
+            u:FormItem.Label="Asset Path:"
+            IsEnabled="{Binding IsLoaded}"
+            Text="{Binding AssetPath}" />
+    </u:FormGroup>
+</UserControl>

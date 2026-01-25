@@ -1,4 +1,4 @@
-// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+// Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License
 using System;
 using System.Collections.Generic;
 using UAssetAPI;
@@ -7,6 +7,8 @@ using UAssetAPI.UnrealTypes;
 namespace CAFESharp.Extensions;
 
 public static class UAssetExtensions {
+    #region Methods
+
     public static string TryGetNameReferenceValue (
         this UAsset uasset,
         int index,
@@ -36,4 +38,13 @@ public static class UAssetExtensions {
             onError?.Invoke(exception);
         }
     }
+
+    public static void SetFolderName (
+        this UAsset uasset,
+        string value
+    ) {
+        uasset.FolderName = (FString) value;
+    }
+
+    #endregion Methods
 }

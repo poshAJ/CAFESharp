@@ -1,4 +1,4 @@
-// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+// Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License
 using System;
 using Avalonia.Controls.Notifications;
 using CAFESharp.Views;
@@ -15,7 +15,6 @@ public sealed class ToastLogger (
 
     public IDisposable? BeginScope<TState> (TState state) where TState : notnull => default!;
 
-    // should have an actual implementation but lazy
     public bool IsEnabled (LogLevel logLevel) => true;
 
     public void Log<TState> (
@@ -25,15 +24,19 @@ public sealed class ToastLogger (
         Exception? exception,
         Func<TState, Exception?, string> formatter
     ) {
-        WindowToastManager toastManager = serviceProvider.GetRequiredService<MainWindow>().ToastManager;
+        WindowToastManager toastManager = serviceProvider
+            .GetRequiredService<MainWindow>()
+            .ToastManager;
 
         Toast toast = new($"{formatter(state, exception)}");
 
         switch (logLevel) {
             case LogLevel.Trace:
                 return;
+
             case LogLevel.Debug:
                 return;
+
             case LogLevel.Information:
                 toastManager.Show(
                     content: toast,
@@ -43,6 +46,7 @@ public sealed class ToastLogger (
                     classes: ["Light"]
                 );
                 return;
+
             case LogLevel.Warning:
                 toastManager.Show(
                     content: toast,
@@ -52,6 +56,7 @@ public sealed class ToastLogger (
                     classes: ["Light"]
                 );
                 return;
+
             case LogLevel.Error:
                 toastManager.Show(
                     content: toast,
@@ -61,8 +66,10 @@ public sealed class ToastLogger (
                     classes: ["Light"]
                 );
                 return;
+
             case LogLevel.Critical:
                 return;
+
             default:
                 return;
         }

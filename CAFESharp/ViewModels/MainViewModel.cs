@@ -1,54 +1,49 @@
-﻿// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+// Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License
+using System.Linq;
+using System.Reflection;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace CAFESharp.ViewModels;
 
-public partial class MainViewModel (
-    ILogger<MainViewModel> logger,
-    BlueprintViewModel blueprintViewModel,
-    WeaponViewModel weaponViewModel,
-    MaterialInstanceViewModel materialInstanceViewModel,
-    BloodSplatterViewModel bloodSplatterViewModel
-) : BaseViewModel {
-    #region Properties
-
-    public BlueprintViewModel BlueprintViewModel { get; } = blueprintViewModel;
-    public WeaponViewModel WeaponViewModel { get; } = weaponViewModel;
-    public MaterialInstanceViewModel MaterialInstanceViewModel { get; } = materialInstanceViewModel;
-    public BloodSplatterViewModel BloodSplatterViewModel { get; } = bloodSplatterViewModel;
-
-    #endregion Properties
-
-    #region Handlers
+public sealed partial class MainViewModel (
+    ILogger<MainViewModel> logger
+) : ObservableObject {
+    #region Events
 
     [RelayCommand]
-    private void SaveAll () {
-        UAssetViewModel[] viewModels = [
-            BlueprintViewModel,
-            WeaponViewModel,
-            MaterialInstanceViewModel,
-            BloodSplatterViewModel
-        ];
+    public void SaveAll () {
+        UAssetViewModel[] models = App.Services.GetServices<UAssetViewModel>().ToArray();
 
-        foreach (var viewModel in viewModels) {
-            if (string.IsNullOrEmpty(viewModel.FilePath)) {
+        foreach (var model in models) {
+            if (string.IsNullOrEmpty(model.FilePath)) {
                 continue;
             }
 
             try {
-                viewModel._uasset.Write(viewModel.FilePath);
+                model.Save();
 
                 logger.LogInformation(
-                    message: "Saved '{FileName}'.", viewModel.FileName
+                    message: "Saved '{FileName}'.", model.FileName
                 );
             } catch {
                 logger.LogError(
-                    message: "An error occured while saving '{FileName}'.", viewModel.FileName
+                    message: "An error occured while saving '{FileName}'.", model.FileName
                 );
             }
         }
     }
 
-    #endregion Handlers
+    #endregion Events
+
+    #region Properties
+
+    public string? Version { get; } = Assembly
+        .GetExecutingAssembly()
+        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+        .InformationalVersion;
+
+    #endregion Properties
 }

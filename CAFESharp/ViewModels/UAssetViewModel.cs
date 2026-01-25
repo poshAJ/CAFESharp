@@ -1,26 +1,59 @@
-// Copyright (c) Ethan "CosmicBoogaloo" and Anthony J. Raymond, MIT License
+// Copyright (c) Ethan Coley and Anthony J. Raymond, MIT License
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using UAssetAPI;
 using UAssetAPI.UnrealTypes;
 
 namespace CAFESharp.ViewModels;
 
-public abstract partial class UAssetViewModel : BaseViewModel {
+public abstract partial class UAssetViewModel (
+    ILogger<UAssetViewModel> logger
+) : ObservableObject {
+    #region Nested
+
+    protected class Definition {
+        public required bool Required { get; set; }
+        public required string Category { get; set; }
+        public required string Type { get; set; }
+        public required string Pattern { get; set; }
+    }
+
+    #endregion Nested
+
+    #region Events
+
+    [RelayCommand]
+    public void Reset () {
+        _uasset = new();
+        _map.Clear();
+
+        RefreshAllProperties();
+    }
+
+    #endregion Events
+
     #region Fields
 
-    internal UAsset _uasset = new();
+    protected UAsset _uasset = new();
+    protected Dictionary<string, int> _map = [];
 
     #endregion Fields
 
     #region Properties
 
-    public string StartPath { get; } = Environment.GetFolderPath(
-        folder: Environment.SpecialFolder.UserProfile
-    );
+    public string StartPath {
+        get => Path.GetDirectoryName(FilePath) ?? Environment.GetFolderPath(
+            folder: Environment.SpecialFolder.UserProfile
+        );
+    }
+
     public string FilePath {
         get => _uasset.FilePath;
         set => SetProperty(
@@ -28,32 +61,89 @@ public abstract partial class UAssetViewModel : BaseViewModel {
             newValue: value,
             model: _uasset,
             callback: (_, path) => {
-                _uasset = new(
-                    path: path,
-                    engineVersion: EngineVersion.VER_UE5_3
-                );
+                if (IsLoaded) {
+                    _uasset.Write(path);
 
-                MapNameReferences();
-                RefreshAllProperties();
+                    _uasset.FilePath = path;
+
+                    OnPropertyChanged(propertyName: nameof(FilePath));
+                    OnPropertyChanged(propertyName: nameof(StartPath));
+                    OnPropertyChanged(propertyName: nameof(FileName));
+                } else {
+                    _uasset = new(
+                        path: path,
+                        engineVersion: EngineVersion.VER_UE5_3
+                    );
+                    _map.Clear();
+
+                    MapNameReferences();
+                    RefreshAllProperties();
+                }
             }
         );
     }
+
     public string FileName {
         get => Path.GetFileName(path: FilePath);
     }
+
     public bool IsLoaded {
         get => !string.IsNullOrEmpty(value: FilePath);
     }
 
+    protected abstract List<Definition> Definitions { get; }
+
     #endregion Properties
 
-    #region Protected Methods
+    #region Methods
 
-    protected abstract void MapNameReferences ();
+    public void Save () => _uasset.Write(FilePath);
 
-    #endregion Protected Methods
+    private static Regex BuildRegex (string pattern) {
+        return new Regex(
+            pattern,
+            RegexOptions.IgnoreCase | RegexOptions.Compiled
+        );
+    }
 
-    #region Private Methods
+    private void MapNameReferences () {
+        List<string> list = _uasset
+            .GetNameMapIndexList()
+            .Select(x => x.Value)
+            .ToList();
+
+        foreach (var definition in Definitions) {
+            string keyName = $"{definition.Category}{definition.Type}";
+            Regex? regex = null;
+
+            if (_map.TryGetValue($"{definition.Category}Path", out int value)) {
+                string name = Path.GetFileNameWithoutExtension(path: list[value]);
+
+                regex = BuildRegex(string.Format(definition.Pattern, Regex.Escape(name)));
+            }
+
+            regex ??= BuildRegex(definition.Pattern);
+
+            int index = list.FindIndex(regex.IsMatch);
+
+            if (index == -1 && definition.Required != true) {
+                continue;
+            }
+
+            if (index == -1) {
+                logger.LogError(
+                    message: "An error occured while mapping '{keyName}'.",
+                    args: keyName
+                );
+
+                Reset();
+
+                return;
+            }
+
+            _map[keyName] = index;
+        }
+    }
 
     private void RefreshAllProperties () {
         PropertyInfo[] properties = GetType()
@@ -64,12 +154,5 @@ public abstract partial class UAssetViewModel : BaseViewModel {
         }
     }
 
-    #endregion Private Methods
-
-    #region Handlers
-
-    [RelayCommand]
-    internal void OpenUAsset (IReadOnlyList<string> paths) => FilePath = paths[0];
-
-    #endregion Handlers
+    #endregion Methods
 }
