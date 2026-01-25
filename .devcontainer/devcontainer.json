@@ -1,9 +1,18 @@
 {
-    "name": "C# (.NET)",
-    "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0",
+    "name": "C# (.NET 8.0)",
+    "dockerFile": "Dockerfile",
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1": {}
+    },
+    "forwardPorts": [
+        6080
+    ],
     "postCreateCommand": "dotnet restore",
     "customizations": {
         "vscode": {
+            "settings": {
+                "dotnet.defaultSolution": "CAFESharp.sln"
+            },
             "extensions": [
                 "ms-dotnettools.csharp"
             ]
